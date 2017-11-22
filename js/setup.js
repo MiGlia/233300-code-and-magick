@@ -18,6 +18,16 @@ function getRandomArrayIndex(Array) {
   return Array[Math.floor(Math.random() * Array.length)];
 }
 
+// Копируем шаблон(идеальный элемент) и заполняем его новыми данными(name, coatColor, eyesColor)
+function renderWizard(wizards) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
+  return wizardElement;
+}
+
 // Генерируем массив объектов с параметрами мага: name, coatColor, eyesColor.
 var wizards = [
   {
@@ -41,16 +51,6 @@ var wizards = [
     eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)
   }
 ];
-
-// Копируем шаблон(идеальный элемент) и заполняем его новыми данными(name, coatColor, eyesColor)
-function renderWizard(wizards) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
-
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
-  return wizardElement;
-}
 
 //  Группируем элементы в обвертку fragment, Вставляем заполненные элементы в DOM и отрсовываем их
 function getRenderWizard() {
