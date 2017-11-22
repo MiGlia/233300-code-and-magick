@@ -40,16 +40,37 @@ var wizards = [
   }
 ];
 
-var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+var similarListElement = document.querySelector('.setup-similar-list');
 
-for (var i = 0; i < wizards.length; i++) {
+function renderWizard(wizards) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
-
-  similarListElement.appendChild(wizardElement);
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
+  return wizardElement;
 }
+
+function getRenderWizard() {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  similarListElement.appendChild(fragment);
+}
+getRenderWizard();
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+// var similarListElement = document.querySelector('.setup-similar-list');
+// var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+//
+// for (var i = 0; i < wizards.length; i++) {
+//   var wizardElement = similarWizardTemplate.cloneNode(true);
+//
+//   wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
+//   wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
+//   wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+//
+//   similarListElement.appendChild(wizardElement);
+// }
+// userDialog.querySelector('.setup-similar').classList.remove('hidden');
