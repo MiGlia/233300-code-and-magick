@@ -12,6 +12,10 @@ window.renderStatistics = function (ctx, names, times) {
       return a - b;
     })[([array.length - 1])];
   }
+  // Находим случайную прозрачность
+  function getRandomValueOpacity(minValue, maxValue) {
+    return Math.random() * (maxValue - minValue) + minValue;
+  }
 
   //  Рисуем гистограмму
   function drawTheHistogram() {
@@ -26,7 +30,7 @@ window.renderStatistics = function (ctx, names, times) {
       var indentX = (hist.indent + hist.width) * i;
       var indentY = hist.height - times[i] * step;
 
-      ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1.0)' : 'rgba(25, 61, 224,  ' + Math.random() + ')';
+      ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1.0)' : 'rgba(25, 61, 224,  ' + getRandomValueOpacity(0.1, 1) + ')';
       ctx.fillRect(initialX + indentX, initialY + indentY, hist.width, times[i] * step);
       ctx.fillStyle = 'rgba(0, 0, 0, 1.0)';
       ctx.fillText(names[i], initialX + indentX, hist.height + initialY + lineHeight);
