@@ -28,31 +28,18 @@ function renderWizard(wizards) {
   return wizardElement;
 }
 
-// Генерируем массив объектов с параметрами мага: name, coatColor, eyesColor.
-var wizards = [
-  {
-    name: getRandomArrayIndex(WIZARD_NAMES) + ' ' + getRandomArrayIndex(WIZARD_SURNAMES),
-    coatColor: getRandomArrayIndex(WIZARD_COAT_COLOR),
-    eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)
-  },
-  {
-    name: getRandomArrayIndex(WIZARD_NAMES) + ' ' + getRandomArrayIndex(WIZARD_SURNAMES),
-    coatColor: getRandomArrayIndex(WIZARD_COAT_COLOR),
-    eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)
-  },
-  {
-    name: getRandomArrayIndex(WIZARD_NAMES) + ' ' + getRandomArrayIndex(WIZARD_SURNAMES),
-    coatColor: getRandomArrayIndex(WIZARD_COAT_COLOR),
-    eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)
-  },
-  {
-    name: getRandomArrayIndex(WIZARD_NAMES) + ' ' + getRandomArrayIndex(WIZARD_SURNAMES),
-    coatColor: getRandomArrayIndex(WIZARD_COAT_COLOR),
-    eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)
-  }
-];
+var wizards = [];
 
-//  Группируем элементы в обвертку fragment, Вставляем заполненные элементы в DOM и отрсовываем их
+// Заполняем массив объектами с параметрами мага: name, coatColor, eyesColor.
+function createArrayWizzards(numberWizard) {
+
+  for (var j = 0; j <= numberWizard - 1; j++) {
+    wizards.push({name: getRandomArrayIndex(WIZARD_NAMES) + ' ' + getRandomArrayIndex(WIZARD_SURNAMES), coatColor: getRandomArrayIndex(WIZARD_COAT_COLOR), eyesColor: getRandomArrayIndex(WIZARD_EYES_COLOR)});
+  }
+}
+createArrayWizzards(4);
+
+//  Группируем элементы в обертку fragment, Вставляем заполненные элементы в DOM и отрсовываем их
 function getRenderWizard() {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < wizards.length; i++) {
