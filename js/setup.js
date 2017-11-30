@@ -109,8 +109,5 @@ setupUserName.addEventListener('focus', function () {
 });
 
 setupUserName.addEventListener('blur', function () {
-  window.addEventListener('keydown', onPopupEscPress);
+  setup.addEventListener('keydown', onPopupEscPress);
 });
-// setupUserName.addEventListener('focus', function (event) {
-//   event.stopPropagation();
-// });
