@@ -75,9 +75,11 @@ function closePopup() {
 
 //  Обьявляем функцию для открытия закрытия окна персонажа с клавиатуры
 function onPopupEscPress(evt) {
+  var result;
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
+    result = evt.target.tagName === 'INPUT' ? evt.preventDefault() : closePopup();
   }
+  return result;
 }
 
 //  Обработчик события по клику для открытия окна персонажа
@@ -123,34 +125,26 @@ setupUserName.addEventListener('invalid', function () {
   }
 });
 
-setupUserName.addEventListener('focus', function () {
-  setup.removeEventListener('keydown', onPopupEscPress);
-});
-
-setupUserName.addEventListener('blur', function () {
-  setup.addEventListener('keydown', onPopupEscPress);
-});
-
-// Обьявляем функции м навешиваем обработчики событий для для смены цета одежы, глаз, фаерболла мага по нажатию кнопки мыши
+// Обьявляем функции и навешиваем обработчики событий для для смены цвета одежы, глаз, фаерболла мага по нажатию кнопки мыши
 function setColorWizardFill(arr) {
   setupWizardCoat.style.fill = getRandomArrayIndex(arr);
 }
 
-setupWizardCoat.addEventListener('click', function () {
-  setColorWizardFill(WIZARD_COAT_COLOR);
-});
-
 function setColorEyesWizardFill(arr) {
   setupWizardEyes.style.fill = getRandomArrayIndex(arr);
+}
+
+function setColorBgWizardFireball(arr) {
+  setupWizardFireball.style.background = getRandomArrayIndex(arr);
 }
 
 setupWizardEyes.addEventListener('click', function () {
   setColorEyesWizardFill(WIZARD_EYES_COLOR);
 });
 
-function setColorBgWizardFireball(arr) {
-  setupWizardFireball.style.background = getRandomArrayIndex(arr);
-}
+setupWizardCoat.addEventListener('click', function () {
+  setColorWizardFill(WIZARD_COAT_COLOR);
+});
 
 setupWizardFireball.addEventListener('click', function () {
   setColorBgWizardFireball(WIZARD_FIREBALL_COLORS);
