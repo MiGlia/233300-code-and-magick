@@ -1,7 +1,7 @@
 'use strict';
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+// userDialog.classList.remove('hidden');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -51,3 +51,66 @@ function getRenderWizard() {
 getRenderWizard();
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+// объявляем переменные (Находим элементы открытия закрытия окна персонажа)
+var setup = document.querySelector('.setup');
+
+var setupOpen = document.querySelector('.setup-open');
+
+var setupClose = setup.querySelector('.setup-close');
+
+//  Обьявляем функцию для открытия окна персонажа
+function openPopup() {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+}
+
+//  Обьявляем функцию для закрытия окна персонажа
+function closePopup() {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+}
+
+//  Обьявляем функцию для открытия закрытия окна персонажа с клавиатуры
+function onPopupEscPress(evt) {
+  if (evt.keyCode === 27) {
+    closePopup();
+  }
+}
+
+//  Обработчик события по клику для открытия окна персонажа
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+// Обработчик события по нажатию Esc для открытия окна персонажа
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    openPopup();
+  }
+});
+
+//  Обработчик события по клику для закрытия окна персонажа
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+// Обработчик события по нажатию Esc для закрытия окна персонажа
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    closePopup();
+  }
+});
+
+var setupUserName = setup.querySelector('.setup-user-name');
+
+setupUserName.addEventListener('focus', function () {
+  setup.removeEventListener('keydown', onPopupEscPress);
+});
+
+setupUserName.addEventListener('blur', function () {
+  window.addEventListener('keydown', onPopupEscPress);
+});
+// setupUserName.addEventListener('focus', function (event) {
+//   event.stopPropagation();
+// });
